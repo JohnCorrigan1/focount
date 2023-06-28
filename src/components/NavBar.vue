@@ -1,4 +1,16 @@
 <script setup lang="ts">
+import { auth } from '../firebase';
+import router from '../router/index';
+
+const logout = async () => {
+
+    console.log(auth.currentUser);
+    router.push({ name: "login" });
+    await auth.signOut();
+    console.log("logging out")
+    console.log(auth.currentUser);
+}
+
 </script>
 
 <template>
@@ -20,7 +32,7 @@
           </router-link>
         </li>
         <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li @click="logout"><a>Logout</a></li>
       </ul>
     </div>
   </div>
