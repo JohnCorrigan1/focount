@@ -38,20 +38,19 @@ const router = createRouter({
   routes,
 });
 
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = auth.currentUser; // Check if user is authenticated
-  console.log("test", auth.currentUser);
-  console.log(from);
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    // If the route requires authentication
-    if (isAuthenticated) {
-      next(); // User is authenticated, proceed to the route
-    } else {
-      next("/login"); // User is not authenticated, redirect to login page
-    }
-  } else {
-    next(); // Route doesn't require authentication, proceed
-  }
-});
+// router.beforeEach((to, from, next) => {
+//   const isAuthenticated = auth.currentUser; // Check if user is authenticated
+//   console.log(from);
+//   if (to.matched.some((record) => record.meta.requiresAuth)) {
+//     // If the route requires authentication
+//     if (isAuthenticated) {
+//       next(); // User is authenticated, proceed to the route
+//     } else {
+//       next("/login"); // User is not authenticated, redirect to login page
+//     }
+//   } else {
+//     next(); // Route doesn't require authentication, proceed
+//   }
+// });
 
 export default router;

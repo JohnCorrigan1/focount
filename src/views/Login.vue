@@ -6,7 +6,6 @@ import router from "../router/index";
 
 const signInWithGoogle = async () => {
     await signInWithPopup(auth, googleProvider);
-    console.log(auth.currentUser)
     checkUser();
 
     router.push({ name: "home" });
@@ -19,9 +18,7 @@ const checkUser = async () => {
         const docRef = doc(db, "users", auth.currentUser.uid);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log("Document data:", docSnap.data());
         } else {
-            console.log("No such document!");
             addUser();
         }
     }  
@@ -30,7 +27,7 @@ const checkUser = async () => {
 const addUser = async () => {
     if(auth.currentUser)
 await setDoc(doc(db, "users", auth.currentUser.uid), {
-  displayName: "",
+  displayName: auth.currentUser.displayName,
   groups: [],
   balance: 0,
 });
@@ -42,7 +39,7 @@ await setDoc(doc(db, "users", auth.currentUser.uid), {
 <template>
     <div class="w-screen h-screen flex justify-center items-center">
         <button
-          class="bg-zinc-200 max-w-[300px] rounded-md p-2 flex gap-8 items-center shadow-sm border w-full text-black justify-center active:scale-95"
+          class="bg-zinc-200 max-w-[300px] rounded-md p-2 flex gap-8 items-center shadow-sm border w-full text-black justify-center active:scale-95 duration-300"
           @click="signInWithGoogle"
         >
           <img

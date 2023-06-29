@@ -4,11 +4,8 @@ import router from '../router/index';
 
 const logout = async () => {
 
-    console.log(auth.currentUser);
     router.push({ name: "login" });
     await auth.signOut();
-    console.log("logging out")
-    console.log(auth.currentUser);
 }
 
 </script>

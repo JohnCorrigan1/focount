@@ -7,9 +7,7 @@ defineProps<{ name: string, description: string, members: string }>()
 
 onMounted(async() => {
   const querySnapshot = await getDocs(collection(db, "users"));
-  console.log(querySnapshot)
   querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
   const data = doc.data()
   console.log(data)
 });
@@ -17,7 +15,7 @@ onMounted(async() => {
 </script>
 
 <template>
-    <router-link :to="{ name: 'group', params: { group: name}}">
+    <router-link :to="{ name: 'group', params: { group: name.replace(/ /g,'_')}}">
       <div class="bg-base-100 rounded-lg text-primary-content p-5 hover:bg-base-300 cursor-pointer hover:scale-[1.02] active:scale-[.98] duration-300 shadow-lg ">
          <h1 class="text-3xl font-bold">{{name}}</h1>
           <p class="">{{description}}</p>
