@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import NewExpenseModal from './NewExpenseModal.vue'
+
 const modal = ref<HTMLDialogElement | null>(null)
 
 const addExpense = () => {
@@ -18,7 +20,7 @@ const closeModal = () => {
 <div class="stats bg-primary text-primary-content">
   
   <div class="stat">
-    <div class="stat-title">Account balance</div>
+    <div class="stat-title">Group spending (June)</div>
     <div class="stat-value">$89,400</div>
     <div class="stat-actions">
       <button @click="addExpense" class="btn btn-sm btn-success">Add expense</button>
@@ -26,14 +28,13 @@ const closeModal = () => {
   </div>
   
   <div class="stat">
-    <div class="stat-title">Current balance</div>
+    <div class="stat-title">Your balance</div>
     <div class="stat-value">$89,400</div>
     <div class="stat-actions">
       <button class="btn btn-sm">Withdrawal</button> 
       <button class="btn btn-sm">deposit</button>
     </div>
   </div>
-  
 </div>
 </div>
  <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="modal" >

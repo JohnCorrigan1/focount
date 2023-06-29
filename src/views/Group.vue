@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GroupExpenseChart from "../components/GroupExpenseChart.vue";
 import GroupMember from "../components/GroupMember.vue";
 import GroupStats from "../components/GroupStats.vue";
 import NavBar from "../components/NavBar.vue";
@@ -14,6 +15,8 @@ import NavBar from "../components/NavBar.vue";
     <main class="h-screen w-screen">
         <NavBar />
         <GroupStats />
+        <GroupExpenseChart />
+
 <div class="w-full flex justify-center">
 <div class="overflow-x-auto w-3/4">
   <table class="table">
