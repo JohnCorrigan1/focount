@@ -3,19 +3,68 @@ import {
   Chart,
   initTE,
 } from "tw-elements";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
+import { db } from "../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
-initTE({ Chart });
+  initTE({ Chart });
+interface Expense {
+   name: string;
+   amount: number;
+   category: string;
+   paidBy: string;
+   for: string[];
+   date: Date
+}
 
-// Chart
+const route = useRoute();
+
+const groceries = ref(0)
+const restaurants = ref(0)
+const entertainment = ref(0)
+const rent = ref(0)
+const gas = ref(0)
+const utilities = ref(0)
+const other = ref(0)
+
+
+const getExpenses = async () => {
+  const docRef = doc(db, "groups", route.params.group.toString().replace(/_/g,' '));
+  const querySnapshot = await getDoc(docRef);
+  const expenses = querySnapshot.data()?.expenses;
+  console.log(expenses)
+  expenses.forEach((expense: Expense) => {
+    if(expense.category === "Groceries") {
+      groceries.value += expense.amount
+    } else if(expense.category === "Restaurants") {
+      restaurants.value += expense.amount
+    } else if(expense.category === "Entertainment") {
+      entertainment.value += expense.amount
+    } else if(expense.category === "Rent") {
+      rent.value += expense.amount
+    } else if(expense.category === "Gas") {
+      gas.value += expense.amount
+    } else if(expense.category === "Utilities") {
+      utilities.value += expense.amount 
+    } else if(expense.category === "other") {
+      other.value += expense.amount
+    }
+  })
+  console.log(groceries.value, restaurants.value, entertainment.value, rent.value, gas.value, utilities.value, other.value)
+  initChart()
+}
+
+const initChart = () => {
+  console.log("init chart")
 const dataDoughnut = {
   type: 'doughnut',
   data: {
-    labels: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday '],
+    labels: ['Groceries', 'Restaurants', 'Entertainment', 'Rent', 'Gas', 'Utilities', 'other'],
     datasets: [
       {
-        label: 'Traffic',
-        data: [2112, 2343, 2545, 3423, 2365, 1985, 987],
+        label: 'Expenses',
+        data: [groceries.value, restaurants.value, entertainment.value, rent.value, gas.value, utilities.value, other.value],
         backgroundColor: [
           'rgba(63, 81, 181, 0.5)',
           'rgba(77, 182, 172, 0.5)',
@@ -29,11 +78,14 @@ const dataDoughnut = {
     ],
   },
 };
+  new Chart(document.getElementById('doughnut-chart'), dataDoughnut);
+}
 
 onMounted(() => {
-    
-new Chart(document.getElementById('doughnut-chart'), dataDoughnut);
+  
+  getExpenses() 
 })
+
 </script>
 
 

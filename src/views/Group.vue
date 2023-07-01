@@ -70,7 +70,7 @@ onMounted(() => {
       </tr>
     </thead>
     <tbody v-for="member in members">
-        <GroupMember :name="member.name" img="./../assets/google.png"  />
+        <GroupMember :name="member.name" :balance="member.balance" img="./../assets/google.png"  />
     </tbody>
   </table>
         </div>
@@ -79,7 +79,7 @@ onMounted(() => {
   <button @click="openModal" class="btn btn-primary">Invite member</button>
 </div>
     </main>
-<dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="newMemberModal" >
+        <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="newMemberModal" >
             <button class="absolute top-5 right-5 btn btn-ghost" @click="closeModal">X</button>
             <NewMemberModal />
         </dialog>

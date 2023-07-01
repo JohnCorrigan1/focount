@@ -1,5 +1,5 @@
 <script setup lang="ts">
- defineProps<{ name: string, img: string }>()
+ defineProps<{ name: string, balance: number, img: string }>()
 
 </script>
 
@@ -20,8 +20,8 @@
               <!-- <div class="text-sm opacity-50">United States</div> -->
           </div>
         </td>
-        <td class="text-red-500 w-full flex justify-center items-center">
-            Balance: $1,000
+        <td :class="`${balance < 0 ? 'text-red-500' : 'text-emerald-500'} w-full flex justify-center items-center`">
+            Balance: ${{ balance }}
           <br/>
           <!-- <span class="badge badge-ghost badge-sm">Desktop Support Technician</span> -->
         </td>

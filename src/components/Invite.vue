@@ -12,7 +12,7 @@ const acceptInvite = async () => {
     const userRef = doc(db, "users", auth.currentUser?.uid);
 
     await updateDoc(groupRef, {
-        members: arrayUnion(auth.currentUser?.displayName)
+        members: arrayUnion({name: auth.currentUser?.displayName, balance: 0})
     });
 
     await updateDoc(userRef, {
