@@ -11,15 +11,15 @@ interface Group {
     members: Array<{name: string, balance: number}>;
 }
 
-const modal = ref<HTMLDialogElement | null>(null)
+const addGroupModal = ref<HTMLDialogElement | null>(null)
 const groups = ref<Array<Group>>([])
 
 const createGroup = () => {
-    modal.value?.showModal()
+    addGroupModal.value?.showModal()
 }
 
 const closeModal = () => {
-    modal.value?.close()
+    addGroupModal.value?.close()
 }
 
 onMounted(() => {
@@ -42,16 +42,16 @@ const getUserGroups = async () => {
 </script>
 
 <template>
-    <div v-for="group in groups" :key="group.name" class="bg-secondary-focus flex flex-col p-10 gap-5 w-1/2 rounded-xl shadow-xl">
-        <GroupCard name="Hacker" description="house of gamers doing stuff" members="5" />
-        <GroupCard :name="group.name" :description="group.description" :members="group.members.length.toString()" />
+    <div class="bg-secondary-focus flex flex-col p-10 gap-5 w-1/2 rounded-xl shadow-xl">
+        <GroupCard v-for="group in groups" :key="group.name" :name="group.name" :description="group.description" :members="group.members.length.toString()" />
         
         <button @click="createGroup" class="btn btn-primary shadow-lg">Create Group</button>
-        <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="modal" >
+        
+    </div>
+<dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="addGroupModal" >
             <button class="absolute top-5 right-5 btn btn-ghost" @click="closeModal">X</button>
             <NewGroupModal />
         </dialog>
-    </div>
 </template>
 
 <style>

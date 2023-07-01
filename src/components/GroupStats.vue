@@ -2,25 +2,32 @@
 import { ref } from 'vue';
 import NewExpenseModal from './NewExpenseModal.vue'
 
-const modal = ref<HTMLDialogElement | null>(null)
+interface Member {
+    name: string;
+    balance: number;
+}
+
+defineProps<{groupName: string, members: Member[]}>()
+
+const expenseModal = ref<HTMLDialogElement | null>(null)
 
 const addExpense = () => {
-    modal.value?.showModal()
+    expenseModal.value?.showModal()
 }
 
 const closeModal = () => {
-    modal.value?.close()
+    expenseModal.value?.close()
 }
 </script>
 
 
 
 <template>
-    <div class="w-full p-10 flex justify-center">
+    <div class="w-full p-10 flex justify-center items-center">
 <div class="stats bg-primary text-primary-content">
   
   <div class="stat">
-    <div class="stat-title">Group spending (June)</div>
+    <div class="stat-title">Your balance</div>
     <div class="stat-value">$89,400</div>
     <div class="stat-actions">
       <button @click="addExpense" class="btn btn-sm btn-success">Add expense</button>
@@ -28,18 +35,18 @@ const closeModal = () => {
   </div>
   
   <div class="stat">
-    <div class="stat-title">Your balance</div>
+    <div class="stat-title">Group spending (June)</div>
     <div class="stat-value">$89,400</div>
     <div class="stat-actions">
-      <button class="btn btn-sm">Withdrawal</button> 
-      <button class="btn btn-sm">deposit</button>
+      <!-- <button class="btn btn-sm">Withdrawal</button>  -->
+      <button class="btn btn-sm">Expense History</button>
     </div>
   </div>
 </div>
 </div>
- <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="modal" >
+ <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="expenseModal" >
             <button class="absolute top-5 right-5 btn btn-ghost" @click="closeModal">X</button>
-            <NewExpenseModal />
+            <NewExpenseModal :members="members" />
         </dialog>
 </template>
 

@@ -1,17 +1,63 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import { doc, getDoc } from "firebase/firestore";
+import { db } from './../firebase.ts'
+import { useRoute } from 'vue-router';
 
+interface Expense {
+   name: string;
+   amount: number;
+   category: string;
+   paidBy: string;
+   for: string[];
+   date: Date
+}
+
+interface Member {
+   name: string;
+   balance: number;
+}
+
+const route = useRoute();
+
+defineProps<{members: Member[]}>()
+
+const categories = ref<string[]>([])
 const name = ref("");
 const amount = ref(0);
+const paidBy = ref("");
+const forWho = ref("");
+const category = ref("");
 
-const createExpense = () => {
-    console.log(name.value, amount.value)
+const createExpense = async () => {
+   const expense: Expense = {
+      name: name.value,
+      amount: amount.value,
+      category: category.value,
+      paidBy: paidBy.value,
+      for: forWho.value.split(","),
+      date: new Date()
+   }
+   console.log(expense)
 }
+
+const getCategories = async () => {
+   const docRef = doc(db, "groups", route.params.group.toString().replace(/_/g,' '));
+   const querySnapshot = await getDoc(docRef);
+   querySnapshot.data()?.categories.forEach((category: string) => {
+      categories.value.push(category)
+   })
+
+}
+
+onMounted(() => {
+   getCategories()
+})
 
 </script>
 
 <template>
-   <form class="">
+   <div class="flex flex-col gap-5">
          <div class="flex flex-col w-1/2">
               <label>Expense Name</label>
               <input v-model="name" placeholder="cool epic guys" class="input input-primary" />
@@ -20,16 +66,27 @@ const createExpense = () => {
               <label for="">Expense amount</label>
               <input v-model="amount" placeholder="100" type="number" class="input input-primary"/>
          </div>
-         <div>
+         <div class="flex flex-col w-1/2">
             <label>Expense category</label>
+            <select v-model="category" class="select select-primary w-full max-w-xs">
+               <option v-for="categoryName in categories" v-bind:value="category">{{categoryName}}</option>
+            </select> 
          </div>
-         <div>
-                <label for="">Paid by</label>
+         <div class="flex flex-col w-1/2">
+            <label for="">Paid by</label>
+            <select v-model="paidBy" class="select select-primary w-full max-w-xs">
+               <option v-for="member in members" v-bind:value="member.name">{{member.name}}</option>
+            </select>
          </div>
-            <div>
-                <label for="">For</label>
-                <div></div>
+            <div class="flex flex-col w-1/2">
+               <label>For</label>
+               <div v-for="member in members" v-bind:value="member.name" class="form-control">
+  <label class="label cursor-pointer">
+    <span class="label-text">{{member.name}}</span> 
+    <input type="checkbox" checked="checked" class="checkbox checkbox-primary" />
+  </label>
+</div>   
             </div>
          <button @click="createExpense" class="btn btn-primary w-1/4">Create</button>
-   </form> 
+   </div> 
 </template>

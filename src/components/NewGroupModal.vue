@@ -19,7 +19,9 @@ const createGroup = async () => {
         await setDoc(doc(db, "groups", name.value), {
             name: name.value,
             description: description.value,
-            members: [{name: auth.currentUser.displayName, balance: 0}]
+            members: [{name: auth.currentUser.displayName, balance: 0}],
+            expenses: [],
+            categories: ["Groceries", "Restaurants", "Entertainment", "Rent", "Utilities", "other"]
         });
     }
 }

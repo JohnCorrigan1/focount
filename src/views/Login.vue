@@ -28,8 +28,10 @@ const addUser = async () => {
     if(auth.currentUser)
 await setDoc(doc(db, "users", auth.currentUser.uid), {
   displayName: auth.currentUser.displayName,
+  email: auth.currentUser.email,
   groups: [],
   balance: 0,
+  invites: [], 
 });
 }
 
