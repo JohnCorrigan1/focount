@@ -80,7 +80,9 @@ onMounted(() => {
     <div class="stat-value">${{monthlySpending}}</div>
     <div class="stat-actions">
       <!-- <button class="btn btn-sm">Withdrawal</button>  -->
+      <router-link :to="{ name: 'expenses', params: { group: route.params.group.toString().replace(/ /g,'_')}}">
       <button class="btn btn-sm">Expense History</button>
+      </router-link>
     </div>
   </div>
 </div>

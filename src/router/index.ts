@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Profile from "../views/Profile.vue";
 import Login from "../views/Login.vue";
 import Group from "../views/Group.vue";
+import Expenses from "../views/Expenses.vue";
 // import { auth } from "../firebase";
 
 const routes = [
@@ -27,6 +28,15 @@ const routes = [
     path: "/:group",
     component: Group,
     name: "group",
+    props: true,
+    meta: {
+      requiresAuth: true, // Add this meta field to indicate authentication is required
+    },
+  },
+  {
+    path: "/:group/expenses",
+    component: Expenses,
+    name: "expenses",
     props: true,
     meta: {
       requiresAuth: true, // Add this meta field to indicate authentication is required
