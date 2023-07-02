@@ -38,7 +38,7 @@ await updateDoc(doc(db, "users", uid), {
 <template>
 <div class="w-full p-10 flex flex-col items-center gap-10">
     <div class="flex flex-col">
-        <label>Username</label>
+        <label>Email</label>
         <input class="input input-primary" v-model="email" type="text" />
     </div>
     <button @click="getUsers"  class="btn btn-primary">Invite</button>

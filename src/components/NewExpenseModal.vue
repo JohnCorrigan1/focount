@@ -91,36 +91,42 @@ onMounted(() => {
 </script>
 
 <template>
-   <div class="flex flex-col gap-5">
-         <div class="flex flex-col w-1/2">
-              <label>Expense Name</label>
-              <input v-model="name" placeholder="cool epic guys" class="input input-primary" />
-         </div>
-         <div class="flex flex-col w-1/2">
-              <label for="">Expense amount</label>
-              <input v-model="amount" placeholder="100" type="number" class="input input-primary"/>
-         </div>
-         <div class="flex flex-col w-1/2">
-            <label>Expense category</label>
-            <select v-model="category" class="select select-primary w-full max-w-xs">
-               <option v-for="categoryName in categories" v-bind:value="categoryName">{{categoryName}}</option>
-            </select> 
-         </div>
-         <div class="flex flex-col w-1/2">
-            <label for="">Paid by</label>
-            <select v-model="paidBy" class="select select-primary w-full max-w-xs">
-               <option v-for="member in members" v-bind:value="member.name">{{member.name}}</option>
-            </select>
-         </div>
+   <div class="flex flex-col gap-2 md:gap-5">
+      <h1 class="text-center">New Expense</h1>
+      <div class="flex gap-2 md:gap-5 lg:gap-10">
             <div class="flex flex-col w-1/2">
-               <label>For</label>
-               <div v-for="member in members" v-bind:value="member.name" class="form-control">
+              <label>Name</label>
+              <input v-model="name" placeholder="cool epic guys" class="input input-primary" />
+            </div>
+            <div class="flex flex-col w-1/2">
+              <label for="">Amount</label>
+              <input v-model="amount" placeholder="100" type="number" class="input input-primary"/>
+            </div>
+         </div>
+         <div class="flex gap-2 md:gap-5 lg:gap-10">
+            <div class="flex flex-col w-1/2">
+               <label>Category</label>
+               <select v-model="category" class="select select-primary w-full max-w-xs">
+                  <option v-for="categoryName in categories" v-bind:value="categoryName">{{categoryName}}</option>
+               </select> 
+            </div>
+            <div class="flex flex-col w-1/2">
+               <label for="">Paid by</label>
+               <select v-model="paidBy" class="select select-primary w-full max-w-xs">
+                  <option v-for="member in members" v-bind:value="member.name">{{member.name}}</option>
+               </select>
+            </div>
+         </div>
+
+               <label class="">For</label>
+            <div class="grid grid-cols-2 md:gap-10 w-full">
+               <div   v-for="member in members" v-bind:value="member.name" class="form-control">
   <label class="label cursor-pointer">
     <span class="label-text">{{member.name}}</span> 
     <input v-model="forWho" :value="member.name"  type="checkbox" class="checkbox checkbox-primary" />
   </label>
 </div>   
             </div>
-         <button @click="createExpense" class="btn btn-primary w-1/4">Create</button>
+         <button @click="createExpense" class="btn btn-primary">Create</button>
    </div> 
 </template>

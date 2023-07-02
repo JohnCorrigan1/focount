@@ -87,8 +87,10 @@ onMounted(() => {
   </div>
 </div>
 </div>
- <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="expenseModal" >
-            <button class="absolute top-5 right-5 btn btn-ghost" @click="closeModal">X</button>
+ <!-- <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="expenseModal" > -->
+<dialog class="fixed top-[33.39%] md:top-[25%] md:left-[25%] m-0 h-2/3 md:h-1/2 min-w-[100%] md:min-w-[50%] md:w-1/2 bg-base-100 md:p-10 md:rounded-lg rounded-t-2xl " ref="expenseModal" >
+
+            <button class="absolute top-1 right-1 md:top-5 md:right-5 btn btn-ghost" @click="closeModal">X</button>
             <NewExpenseModal :members="members" />
         </dialog>
 </template>

@@ -81,8 +81,10 @@ onMounted(() => {
   <button @click="openModal" class="btn btn-primary">Invite member</button>
 </div>
     </main>
-        <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="newMemberModal" >
-            <button class="absolute top-5 right-5 btn btn-ghost" @click="closeModal">X</button>
+<dialog class="fixed top-[50%] md:top-[25%] md:left-[25%] m-0 h-1/2 min-w-[100%] md:min-w-[50%] md:w-1/2 bg-base-100 md:p-10 md:rounded-lg rounded-t-2xl " ref="newMemberModal" >
+
+        <!-- <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="newMemberModal" > -->
+            <button class="absolute top-1 right-1 md:top-5 md:right-5 btn btn-ghost" @click="closeModal">X</button>
             <NewMemberModal />
         </dialog>
 </template>

@@ -45,6 +45,6 @@ const createGroup = async () => {
             </div>
 
 </div>
-            <button @click="createGroup" class="btn btn-primary w-1/4">Create</button>
+            <button @click="createGroup" class="btn btn-primary w-full">Create</button>
         </div>
 </template>
