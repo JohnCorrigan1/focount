@@ -9,9 +9,12 @@ const logout = async () => {
     await auth.signOut();
 }
 
+const profile = auth.currentUser!.photoURL?.toString();
+
 onMounted(() => {
   themeChange(false)
 })
+
 
 </script>
 
@@ -36,7 +39,7 @@ onMounted(() => {
    <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <img src="../assets/vue.svg" />
+          <img :src="profile" />
         </div>
       </label>
       <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">

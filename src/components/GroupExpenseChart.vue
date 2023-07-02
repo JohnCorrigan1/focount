@@ -90,7 +90,7 @@ onMounted(() => {
 
 
 <template>
-<div class="mx-auto w-3/5 overflow-hidden text-white ">
+<div class="mx-auto p-5 w-full md:w-3/4 overflow-hidden text-white ">
   <canvas class="text-white" id="doughnut-chart"></canvas>
 </div>
 </template>

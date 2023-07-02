@@ -16,7 +16,7 @@ onMounted(async() => {
 
 <template>
   <router-link :to="{ name: 'group', params: { group: name.replace(/ /g,'_'), groupName: name}}">
-      <div class="bg-base-100 rounded-lg text-primary-content p-5 hover:bg-base-300 cursor-pointer hover:scale-[1.02] active:scale-[.98] duration-300 shadow-lg ">
+      <div class="bg-base-100 rounded-lg p-5 hover:bg-base-300 cursor-pointer hover:scale-[1.02] active:scale-[.98] duration-300 shadow-lg ">
          <h1 class="text-3xl font-bold">{{name}}</h1>
           <p class="">{{description}}</p>
       </div>

@@ -53,11 +53,13 @@ onMounted(() => {
 <template>
     <main class="min-h-screen min-w-screen">
         <NavBar />
+        <div class="md:flex lg:p-10">
         <GroupStats :members="members" :groupName="route.params.group.toString().replace(/_/g,' ')" />
         <GroupExpenseChart />
+        </div>
 
 <div class="w-full flex justify-center">
-<div class="overflow-x-auto w-3/4">
+<div class="overflow-x-auto w-full md:w-3/4">
   <table class="table">
     <!-- head -->
     <thead>

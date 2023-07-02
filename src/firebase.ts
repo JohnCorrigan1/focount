@@ -2,9 +2,9 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GoogleAuthProvider,
-  // browserLocalPersistence,
-  // setPersistence,
-  // signInWithPopup,
+  browserLocalPersistence,
+  setPersistence,
+  signInWithPopup,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -25,6 +25,7 @@ const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
 const db = getFirestore(app);
 const auth = getAuth(app);
+
 const googleProvider = new GoogleAuthProvider();
 
 // setPersistence(auth, browserLocalPersistence)

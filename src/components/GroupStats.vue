@@ -64,11 +64,11 @@ onMounted(() => {
 
 
 <template>
-    <div class="w-full p-10 flex justify-center items-center">
+    <div class="w-full p-5 lg:p-10 flex justify-center items-center">
 <div class="stats bg-primary text-primary-content">
   
   <div class="stat">
-    <div class="stat-title">Your balance</div>
+    <div class="stat-title text-primary-content">Your balance</div>
     <div class="stat-value">${{userBalance}}</div>
     <div class="stat-actions">
       <button @click="addExpense" class="btn btn-sm btn-success">Add expense</button>
@@ -76,12 +76,12 @@ onMounted(() => {
   </div>
   
   <div class="stat">
-    <div class="stat-title">Group spending (June)</div>
+    <div class="stat-title text-primary-content">Group (June)</div>
     <div class="stat-value">${{monthlySpending}}</div>
     <div class="stat-actions">
       <!-- <button class="btn btn-sm">Withdrawal</button>  -->
       <router-link :to="{ name: 'expenses', params: { group: route.params.group.toString().replace(/ /g,'_')}}">
-      <button class="btn btn-sm">Expense History</button>
+      <button class="btn btn-sm">Expenses</button>
       </router-link>
     </div>
   </div>
