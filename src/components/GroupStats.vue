@@ -16,7 +16,7 @@ interface Expense {
    category: string;
    paidBy: string;
    for: string[];
-   date: Date
+   date: any 
 }
 
 const monthlySpending = ref(0);
@@ -34,12 +34,11 @@ const getMonthlySpending = async () => {
         }
     })
     const expenses = querySnapshot.data()?.expenses;
-    console.log(expenses)
     expenses.forEach((expense: Expense) => {
         // if(expense.date.toString().includes(new Date().getMonth().toString()) && expense.date.toString().includes(new Date().getFullYear().toString()) {
-if(expense.date.toString().includes(new Date().getMonth().toString())) {
+// if(expense.date.toString().includes(new Date().getMonth().toString())) {
+    if(new Date(expense.date.seconds * 1000).getMonth().toString() === new Date().getMonth().toString() && new Date(expense.date.seconds * 1000).getFullYear().toString() === new Date().getFullYear().toString()){
             monthlySpending.value += expense.amount
-            console.log(expense.amount)
         }
     })
 }

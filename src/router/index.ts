@@ -52,7 +52,6 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const isAuthenticated = auth.currentUser; // Check if user is authenticated
   console.log(from);
-  console.log("isAuthenticated", isAuthenticated);
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     // If the route requires authentication
     if (isAuthenticated) {

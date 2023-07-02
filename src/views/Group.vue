@@ -38,13 +38,9 @@ const getGroup = async () => {
     querySnapshot.data()?.members.forEach(async (member: Member) => {
         members.value.push(member as {name: string, balance: number})
     })
-    console.log(querySnapshot.data())
-    // members = querySnapshot.data()?.members;
-
 }
 
 onMounted(() => {
-  console.log(route.params.group)
   getGroup()
 })
 

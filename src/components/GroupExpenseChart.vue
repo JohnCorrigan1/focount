@@ -33,7 +33,6 @@ const getExpenses = async () => {
   const docRef = doc(db, "groups", route.params.group.toString().replace(/_/g,' '));
   const querySnapshot = await getDoc(docRef);
   const expenses = querySnapshot.data()?.expenses;
-  console.log(expenses)
   expenses.forEach((expense: Expense) => {
     if(expense.category === "Groceries") {
       groceries.value += expense.amount
@@ -51,12 +50,10 @@ const getExpenses = async () => {
       other.value += expense.amount
     }
   })
-  console.log(groceries.value, restaurants.value, entertainment.value, rent.value, gas.value, utilities.value, other.value)
   initChart()
 }
 
 const initChart = () => {
-  console.log("init chart")
 const dataDoughnut = {
   type: 'doughnut',
   data: {

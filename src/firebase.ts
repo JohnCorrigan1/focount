@@ -2,9 +2,9 @@ import { initializeApp } from "firebase/app";
 import {
   getAuth,
   GoogleAuthProvider,
-  browserLocalPersistence,
-  setPersistence,
-  signInWithPopup,
+  // browserLocalPersistence,
+  // setPersistence,
+  // signInWithPopup,
 } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
