@@ -117,7 +117,7 @@ onMounted(() => {
                <div v-for="member in members" v-bind:value="member.name" class="form-control">
   <label class="label cursor-pointer">
     <span class="label-text">{{member.name}}</span> 
-    <input v-model="forWho" :value="member.name"  type="checkbox" checked="checked" class="checkbox checkbox-primary" />
+    <input v-model="forWho" :value="member.name"  type="checkbox" class="checkbox checkbox-primary" />
   </label>
 </div>   
             </div>
