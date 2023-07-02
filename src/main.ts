@@ -8,5 +8,6 @@ import { auth } from "./firebase";
 
 auth.onAuthStateChanged(async (user) => {
   var user = await auth.currentUser;
+  console.log(user);
   createApp(App).use(router).mount("#app");
 });
