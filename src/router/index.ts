@@ -11,17 +11,17 @@ const routes = [
     path: "/",
     component: Home,
     name: "home",
-    meta: {
-      requiresAuth: true, // Add this meta field to indicate authentication is required
-    },
+    // meta: {
+    //   requiresAuth: true, // Add this meta field to indicate authentication is required
+    // },
   },
   {
     path: "/profile",
     component: Profile,
     name: "profile",
-    meta: {
-      requiresAuth: true, // Add this meta field to indicate authentication is required
-    },
+    // meta: {
+    //   requiresAuth: true, // Add this meta field to indicate authentication is required
+    // },
   },
   { path: "/login", component: Login, name: "login" },
   {
@@ -29,18 +29,18 @@ const routes = [
     component: Group,
     name: "group",
     props: true,
-    meta: {
-      requiresAuth: true, // Add this meta field to indicate authentication is required
-    },
+    // meta: {
+    //   requiresAuth: true, // Add this meta field to indicate authentication is required
+    // },
   },
   {
     path: "/:group/expenses",
     component: Expenses,
     name: "expenses",
     props: true,
-    meta: {
-      requiresAuth: true, // Add this meta field to indicate authentication is required
-    },
+    // meta: {
+    //   requiresAuth: true, // Add this meta field to indicate authentication is required
+    // },
   },
 ];
 
