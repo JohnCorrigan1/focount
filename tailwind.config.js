@@ -9,4 +9,14 @@ export default {
     extend: {},
   },
   plugins: [require("daisyui"), require("tw-elements/dist/plugin.cjs")],
+  daisyui: {
+    styled: true,
+    themes: ["winter", "night"],
+    base: true,
+    utils: true,
+    logs: true,
+    rtl: false,
+    prefix: "",
+    // darkTheme: "night",
+  },
 };
