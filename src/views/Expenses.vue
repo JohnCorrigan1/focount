@@ -37,8 +37,8 @@ onMounted(() => {
     <main class="min-h-screen min-w-screen">
     <NavBar />
 
-            <h1>Expenses</h1>
-       <div class="flex flex-col gap-5 items-center w-full justify-center">
+            <h1 class="text-center text-xl font-bold mt-5 mb-5">Expenses</h1>
+       <div class="flex flex-col gap-5 items-center w-full justify-center p-2">
         <Expense v-for="expense in expenses" :key="expense.name" :expense="expense" /> 
        </div> 
     </main>

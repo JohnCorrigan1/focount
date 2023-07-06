@@ -56,10 +56,10 @@ const updateBalances = async () => {
    console.log(members)
    members.forEach((member: Member) => {
       if(member.name === paidBy.value) {
-         member.balance += amount.value
+         member.balance += parseInt(amount.value.toFixed(2))
       }
       if(forWhoArray.includes(member.name)) {
-         member.balance -= amount.value / forWhoArray.length
+         member.balance -= parseInt((amount.value / forWhoArray.length).toFixed(2))
       }
    })
    console.log(members)
@@ -106,13 +106,13 @@ onMounted(() => {
          <div class="flex gap-2 md:gap-5 lg:gap-10">
             <div class="flex flex-col w-1/2">
                <label>Category</label>
-               <select v-model="category" class="select select-primary w-full max-w-xs">
+               <select v-model="category" class="select select-primary">
                   <option v-for="categoryName in categories" v-bind:value="categoryName">{{categoryName}}</option>
                </select> 
             </div>
             <div class="flex flex-col w-1/2">
                <label for="">Paid by</label>
-               <select v-model="paidBy" class="select select-primary w-full max-w-xs">
+               <select v-model="paidBy" class="select select-primary">
                   <option v-for="member in members" v-bind:value="member.name">{{member.name}}</option>
                </select>
             </div>

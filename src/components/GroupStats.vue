@@ -68,7 +68,7 @@ onMounted(() => {
   
   <div class="stat">
     <div class="stat-title text-primary-content">Your balance</div>
-    <div class="stat-value">${{userBalance}}</div>
+    <div class="stat-value">${{userBalance.toFixed(2)}}</div>
     <div class="stat-actions">
       <button @click="addExpense" class="btn btn-sm btn-success">Add expense</button>
     </div>
@@ -86,12 +86,12 @@ onMounted(() => {
   </div>
 </div>
 </div>
- <!-- <dialog class="w-1/2 h-1/2 bg-base-100 p-10 rounded-lg " ref="expenseModal" > -->
-<dialog class="fixed top-[33.39%] md:top-[25%] md:left-[25%] m-0 h-2/3 md:h-1/2 min-w-[100%] md:min-w-[50%] md:w-1/2 bg-base-100 md:p-10 md:rounded-lg rounded-t-2xl " ref="expenseModal" >
-
-            <button class="absolute top-1 right-1 md:top-5 md:right-5 btn btn-ghost" @click="closeModal">X</button>
-            <NewExpenseModal :members="members" />
-        </dialog>
+<dialog class="fixed top-[33.39%] lg:top-[16.67%] 2xl:top-[25%] lg:left-[25%] m-0 h-2/3 2xl:h-1/2 min-w-[100%] lg:min-w-[50%] lg:w-1/2 bg-base-100 md:p-10 md:rounded-lg rounded-t-2xl " ref="expenseModal" >
+    <button @click="closeModal" class="absolute top-1 right-1 md:top-5 md:right-5 btn btn-square btn-outline">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+    </button> 
+    <NewExpenseModal :members="members" />
+</dialog>
 </template>
 
 <style>

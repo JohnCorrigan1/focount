@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
+import { doc, getDoc, updateDoc } from "firebase/firestore";
+import { db } from './../firebase.ts'
+import { useRoute } from 'vue-router';
+
 interface Expense {
    name: string;
    amount: number;
@@ -8,26 +13,55 @@ interface Expense {
    date: any 
 }
 
-defineProps<{expense: Expense}>()
+const expense = defineProps<{expense: Expense}>()
+
+const route = useRoute();
+
+const deleteExpense = async () => {
+    console.log("deleting")
+    const docRef = doc(db, "groups", route.params.group.toString().replace(/_/g,' '));
+    const querySnapshot = await getDoc(docRef);
+    const expenses = querySnapshot.data()?.expenses;
+    const newExpenses = expenses.filter((firebaseExpense: Expense) => {
+        return expense.expense.name !== firebaseExpense.name && expense.expense.amount !== firebaseExpense.amount
+    })
+    await updateDoc(docRef, {
+        expenses: newExpenses
+    })
+}
+
+onMounted(() => {
+})
+
 
 </script>
 
 <template>
-    <div class="flex p-5 gap-5 bg-primary rounded-lg text-primary-content md:w-2/3 hover:bg-primary-focus">
+<div class="collapse bg-base-200 lg:w-1/2">
+  <input type="radio" name="my-accordion-1"  /> 
+  <div class="collapse-title text-xl font-medium">
+    <div class="flex flex-row justify-between items-center">
         <div class="flex flex-col gap-3">
-            <h2 class="font-semibold text-xl">{{ expense.name }}</h2>
-            <p class="text-lg font-semibold">${{ expense.amount }}</p>
+            <h2 class="font-semibold text-xl">{{ expense.expense.name }}</h2>
+            <p class="text-lg font-semibold">${{ expense.expense.amount }}</p>
         </div>
-        <div class="flex flex-col gap-3">
-            <p>Paid By: {{ expense.paidBy }}</p>
-            <p>Category: {{ expense.category }}</p>
-        </div>
-        <div class="flex flex-col gap-3">
-            <p>For: {{ expense.for.join(", ") }}</p>
-            <p>{{ new Date(expense.date.seconds * 1000).toLocaleDateString("en-us") }}</p>
-        </div>
+       
         <div>
-            <button class="btn btn-secondary">Delete</button>
+            <button @click="deleteExpense" class="btn btn-primary z-50">Delete</button>
         </div>
-    </div>
+  </div>
+  </div>
+  <div class="collapse-content"> 
+    <div class="flex justify-between items-center">
+ <div class="flex flex-col gap-3">
+            <p>Paid By: {{ expense.expense.paidBy }}</p>
+            <p>For: {{ expense.expense.for.join(", ") }}</p>
+        </div>
+        <div class="flex flex-col gap-3">
+            <p>Category: {{ expense.expense.category }}</p>
+            <p>{{ new Date(expense.expense.date.seconds * 1000).toLocaleDateString("en-us") }}</p>
+        </div>
+</div>
+  </div>
+</div>
 </template>
