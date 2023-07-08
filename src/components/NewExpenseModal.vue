@@ -45,8 +45,9 @@ const createExpense = async () => {
    await updateDoc(docRef, {
       expenses: arrayUnion(expense)
    })
- 
+
    updateBalances()
+   // addExpense(payer, amount.value, props.members);
 }
 
 const updateBalances = async () => {

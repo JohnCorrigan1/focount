@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { onMounted } from 'vue';
-import { db } from './../firebase.ts'
-import { collection, getDocs } from "firebase/firestore";
+// import { onMounted } from 'vue';
+// import { db } from './../firebase.ts'
+// import { collection, getDocs } from "firebase/firestore";
 
 defineProps<{ name: string, description: string, members: string }>()
 
-onMounted(async() => {
-  const querySnapshot = await getDocs(collection(db, "users"));
-  querySnapshot.forEach((doc) => {
-  const data = doc.data()
-  console.log(data)
-});
-})
+// onMounted(async() => {
+  // const querySnapshot = await getDocs(collection(db, "users"));
+  // querySnapshot.forEach((doc) => {
+  // const data = doc.data()
+  // console.log(data)
+// });
+// })
 </script>
 
 <template>

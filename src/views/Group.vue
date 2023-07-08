@@ -32,11 +32,11 @@ const closeModal = () => {
 }
 
 const getGroup = async () => {
-      //@ts-ignore
+      // @ts-ignore
     const docRef = doc(db, "groups", route.params.group.replace(/_/g,' '));
     const querySnapshot = await getDoc(docRef);
     querySnapshot.data()?.members.forEach(async (member: Member) => {
-        members.value.push(member as {name: string, balance: number})
+        members.value.push(member)
     })
 }
 
@@ -54,7 +54,12 @@ onMounted(() => {
         <GroupExpenseChart />
         </div>
 
-<div class="w-full flex justify-center">
+<div class="w-full flex flex-col items-center ">
+  <div class="p-10 w-full flex justify-center">
+    <router-link :to="{ name: 'payout', params: { group: route.params.group.toString().replace(/ /g,'_')}}">
+      <button class="btn btn-primary">Payout</button>
+    </router-link>
+  </div>
 <div class="overflow-x-auto w-full md:w-3/4">
   <table class="table">
     <!-- head -->
@@ -67,8 +72,8 @@ onMounted(() => {
         <th></th>
       </tr>
     </thead>
-    <tbody v-for="member in members">
-        <GroupMember :name="member.name" :balance="member.balance" img="./../assets/google.png"  />
+    <tbody >
+        <GroupMember v-for="member in members" :name="member.name" :balance="member.balance" img="./../assets/google.png"  />
     </tbody>
   </table>
         </div>

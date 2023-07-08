@@ -5,6 +5,7 @@ import Login from "../views/Login.vue";
 import Group from "../views/Group.vue";
 import Expenses from "../views/Expenses.vue";
 import MemberDetails from "../views/MemberDetails.vue";
+import Payout from "../views/Payout.vue";
 import { auth } from "../firebase";
 
 const routes = [
@@ -47,6 +48,15 @@ const routes = [
     path: "/:group/:member",
     component: MemberDetails,
     name: "memberDetails",
+    props: true,
+    meta: {
+      requiresAuth: true, // Add this meta field to indicate authentication is required
+    },
+  },
+  {
+    path: "/:group/payout",
+    component: Payout,
+    name: "payout",
     props: true,
     meta: {
       requiresAuth: true, // Add this meta field to indicate authentication is required

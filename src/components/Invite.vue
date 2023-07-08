@@ -1,22 +1,51 @@
 <script setup lang="ts">
-import { doc, updateDoc, arrayRemove, arrayUnion } from "firebase/firestore";
+import { doc, updateDoc, arrayRemove, arrayUnion, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 
-defineProps<{ name: string }>()
+const props = defineProps<{ name: string }>()
 
-const name = "super epic guys"
+interface Member {
+    name: string;
+    balance: number;
+    // balances: {name: string, balance: number}[];
+}
+
+// const name = "super epic guys"
+
+
 const acceptInvite = async () => {
     if(!auth.currentUser) return
 
-    const groupRef = doc(db, "groups", name);
-    const userRef = doc(db, "users", auth.currentUser?.uid);
+    
+    const groupRef = doc(db, "groups", props.name);
+    const querySnapshot = await getDoc(groupRef);
+    const members: Member[] = querySnapshot.data()?.members;
+    // members.forEach((member: Member) => {
+        // member.balances.push({name: auth.currentUser?.displayName!, balance: 0})
+    // })
+    
+    const newMember = {
+        name: auth.currentUser?.displayName!,
+        balance: 0,
+        // balances: members.map((member: Member) => {
+            // return {name: member.name, balance: 0}
+        // })
+    }
+    
+    members.push(newMember)
 
     await updateDoc(groupRef, {
-        members: arrayUnion({name: auth.currentUser?.displayName, balance: 0})
-    });
+        members: members
+    }) 
+    // const members: Member[] = await getDoc(groupRef).data()?.members
+    const userRef = doc(db, "users", auth.currentUser?.uid);
+
+    // await updateDoc(groupRef, {
+        // members: arrayUnion({name: auth.currentUser?.displayName, balance: 0})
+    // });
 
     await updateDoc(userRef, {
-        groups: arrayUnion(name)
+        groups: arrayUnion(props.name)
     });
 
     await removeInvite()

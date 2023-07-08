@@ -5,10 +5,16 @@ import NewGroupModal from "./NewGroupModal.vue";
 import { doc, getDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 
+interface Member {
+    name: string;
+    balance: number;
+}
+
 interface Group {
     name: string;
     description: string;
-    members: Array<{name: string, balance: number}>;
+    // members: Array<{name: string, balance: number}>;
+    members: Member[];
 }
 
 const addGroupModal = ref<HTMLDialogElement | null>(null)
@@ -36,7 +42,10 @@ const getUserGroups = async () => {
         const docRef = doc(db, "groups", group);
         const docSnap = await getDoc(docRef);
         groups.value.push(docSnap.data() as Group)
+        // console.log(docSnap.data())
     })
+    console.log("groups:", groups.value)
+    console.log(groups.value[5].name)
 }
 
 </script>
