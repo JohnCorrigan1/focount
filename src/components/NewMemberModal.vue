@@ -7,6 +7,7 @@ import { useRoute } from "vue-router";
 const email = ref("");
 // const users = ref<any>([]);
 const route = useRoute();
+ const props = defineProps<{modal: any}>();
 
 const getUsers = async () => {
     const querySnapshot = await getDocs(collection(db, "users"));
@@ -27,7 +28,10 @@ const inviteMember = async (uid: string) => {
 // Set the "capital" field of the city 'DC'
 await updateDoc(doc(db, "users", uid), {
     invites: arrayUnion(route.params.group.toString().replace(/_/g,' '))
-});   
+});
+
+     props.modal.close();
+
 }
 
 // const sendInvite = () => {

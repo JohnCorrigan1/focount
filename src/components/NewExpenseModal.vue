@@ -20,7 +20,7 @@ interface Member {
 
 const route = useRoute();
 
-defineProps<{members: Member[]}>()
+const props = defineProps<{members: Member[], modal: any}>()
 
 let forWhoArray: string[] = [];
 const categories = ref<string[]>([])
@@ -46,8 +46,8 @@ const createExpense = async () => {
       expenses: arrayUnion(expense)
    })
 
-   updateBalances()
-   // addExpense(payer, amount.value, props.members);
+   updateBalances();
+    props.modal.close();
 }
 
 const updateBalances = async () => {
@@ -114,7 +114,7 @@ onMounted(() => {
             <div class="flex flex-col w-1/2">
                <label for="">Paid by</label>
                <select v-model="paidBy" class="select select-primary">
-                  <option v-for="member in members" v-bind:value="member.name">{{member.name}}</option>
+                  <option v-for="member in props.members" v-bind:value="member.name">{{member.name}}</option>
                </select>
             </div>
          </div>

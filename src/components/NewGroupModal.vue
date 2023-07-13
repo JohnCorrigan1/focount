@@ -3,6 +3,7 @@ import { ref } from 'vue';
 import { updateDoc, doc, arrayUnion, setDoc } from 'firebase/firestore';
 import { db, auth } from './../firebase'
 
+const props = defineProps<{modal: any}>();
 const name = ref("");
 const description = ref("");
 
@@ -24,6 +25,7 @@ const createGroup = async () => {
             categories: ["Groceries", "Restaurants", "Entertainment", "Rent", "Utilities", "other"]
         });
     }
+     props.modal.close();
 }
 
 
