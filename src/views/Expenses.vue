@@ -26,6 +26,7 @@ const getExpenses = async () => {
    const expensesData = querySnapshot.data()?.expenses;
      //sort expenses by date newest to oldest
     expensesData.sort((a: Expense, b: Expense) => {
+        // @ts-ignore
         return b.date.seconds * 1000 - a.date.seconds * 1000
     })
     expenses.value = expensesData
